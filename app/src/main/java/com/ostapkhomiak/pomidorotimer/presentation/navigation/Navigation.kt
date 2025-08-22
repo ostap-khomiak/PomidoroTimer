@@ -2,9 +2,7 @@ package com.ostapkhomiak.pomidorotimer.presentation.navigation
 
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.automirrored.filled.List
 import androidx.compose.material.icons.filled.Home
-import androidx.compose.material.icons.filled.Info
 import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material.icons.filled.Timer
 import androidx.compose.material.icons.outlined.Home
@@ -21,14 +19,13 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
-import androidx.compose.runtime.getValue
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavController
-import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.ostapkhomiak.pomidorotimer.presentation.navigation.NavItem
 
 @Composable
 fun NavigationInit() {
@@ -39,12 +36,13 @@ fun NavigationInit() {
     ) { innerPadding ->
         NavHost(
             navController = navController,
-            startDestination = "timer",
+            startDestination = Screen.Timer.route,
             modifier = Modifier.padding(innerPadding)
         ) {
-            composable("timer") { Text("timer") } // TODO: implement screens
-            composable("inventory") { Text("inventory") }
-            composable("settings") { Text("settings") }
+            composable(Screen.Timer.route) { Text("timer") }
+            composable(Screen.Inventory.route) { Text("inventory") }
+            composable(Screen.Settings.route) { Text("settings") }
+
         }
     }
 }
@@ -102,9 +100,9 @@ fun NavigationBarInit(navController: NavController) {
                     }
 
                 },
-                label = { Text(text = item.title) })
+                label = { Text(text = item.title) }
+            )
         }
     }
-
 
 }
