@@ -25,6 +25,7 @@ import androidx.navigation.NavController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.ostapkhomiak.pomidorotimer.presentation.timer.ShowTimer
 
 @Composable
 fun NavigationInit() {
@@ -38,7 +39,7 @@ fun NavigationInit() {
             startDestination = Screen.Timer.route,
             modifier = Modifier.padding(innerPadding)
         ) {
-            composable(Screen.Timer.route) { Text("timer") }
+            composable(Screen.Timer.route) { ShowTimer() }
             composable(Screen.Inventory.route) { Text("inventory") }
             composable(Screen.Settings.route) { Text("settings") }
 
