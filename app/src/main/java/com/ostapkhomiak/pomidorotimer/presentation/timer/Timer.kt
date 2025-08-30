@@ -6,7 +6,8 @@ import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -24,27 +25,27 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.ostapkhomiak.pomidorotimer.ui.theme.Purple40
 
 
 @Composable
 fun ShowTimer(){
     Box (
-        modifier = Modifier.fillMaxSize(),
+        modifier = Modifier.fillMaxWidth().padding(128.dp),
         contentAlignment = Alignment.Center
     ) {
-        CircularProgressBar(0.52F, 500)
+        CircularProgressBar(200, 500)
     }
-
 }
 
 
 @Composable
 fun CircularProgressBar(
-    percentage: Float,
-    number: Int,
+    timeElapsed: Int,
+    timeLimitInSeconds: Int,
     fontSize: TextUnit = 28.sp,
     radius: Dp = 100.dp,
-    color: Color = Color.Green,
+    color: Color = Purple40,
     strokeWidth: Dp = 8.dp,
     animDuration: Int = 1000,
     animDelay: Int = 0
@@ -52,13 +53,15 @@ fun CircularProgressBar(
     var animationPlayed by remember { mutableStateOf(false)}
 
     val curPercentage = animateFloatAsState(
-        targetValue = if (animationPlayed) percentage else 0f,
+        targetValue = if (animationPlayed) (timeElapsed.toFloat() / timeLimitInSeconds) else 0f,
         animationSpec = tween(
             durationMillis = animDuration,
             delayMillis = animDelay
         )
 
     )
+
+    var timeLeft = timeLimitInSeconds - timeElapsed
 
     LaunchedEffect(key1 = true) {
         animationPlayed = true
@@ -80,7 +83,7 @@ fun CircularProgressBar(
         }
 
         Text(
-            text = (curPercentage.value * number).toInt().toString(),
+            text = timeLeft.toString(),  // TODO: style it to time format MM:SS
             fontSize = fontSize,
             fontWeight = FontWeight.Bold
         )
