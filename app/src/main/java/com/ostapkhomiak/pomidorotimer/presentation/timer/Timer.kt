@@ -34,7 +34,7 @@ fun ShowTimer(){
         modifier = Modifier.fillMaxWidth().padding(128.dp),
         contentAlignment = Alignment.Center
     ) {
-        CircularProgressBar(200, 500)
+        CircularProgressBar(200, 400)
     }
 }
 
@@ -83,7 +83,7 @@ fun CircularProgressBar(
         }
 
         Text(
-            text = timeLeft.toString(),  // TODO: style it to time format MM:SS
+            text = String.format("%02d:%02d", timeLeft / 60, timeLeft % 60),
             fontSize = fontSize,
             fontWeight = FontWeight.Bold
         )
