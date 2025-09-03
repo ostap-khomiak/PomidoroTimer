@@ -1,15 +1,26 @@
 package com.ostapkhomiak.pomidorotimer.presentation.timer
 
 
+import android.widget.NumberPicker
 import androidx.compose.ui.graphics.Color
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.Canvas
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.wrapContentSize
+import androidx.compose.material3.Button
+import androidx.compose.material3.OutlinedTextField
+import androidx.compose.material3.Slider
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
@@ -25,20 +36,87 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.compose.ui.viewinterop.AndroidView
 import com.ostapkhomiak.pomidorotimer.ui.theme.Purple40
+import kotlinx.coroutines.delay
 
 
 @Composable
-fun ShowTimer(){
-    Box (
-        modifier = Modifier.fillMaxWidth().padding(128.dp),
-        contentAlignment = Alignment.Center
+fun ShowTimer() {
+    var inputText by remember { mutableStateOf("1") }
+    var selectedMinutes by remember { mutableStateOf(1) }
+    var isRunning by remember { mutableStateOf(false) }
+    var timeElapsed by remember { mutableStateOf(0) }
+    var timeLimit by remember { mutableStateOf(60) }
+
+    // Timer countdown
+    LaunchedEffect(isRunning) {
+        if (isRunning) {
+            timeElapsed = 0
+            while (timeElapsed < timeLimit && isRunning) {
+                delay(1000L)
+                timeElapsed++
+            }
+            isRunning = false
+        }
+    }
+
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(32.dp),
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.Center
     ) {
-        CircularProgressBar(200, 400)
+        CircularProgressBar(
+            timeElapsed = timeElapsed,
+            timeLimitInSeconds = timeLimit
+        )
+
+        Spacer(modifier = Modifier.height(32.dp))
+
+        if (!isRunning) {
+
+            OutlinedTextField(
+                value = inputText,
+                onValueChange = { newValue ->
+                    if (newValue.all { it.isDigit() }) {
+                        inputText = newValue
+                    }
+                },
+                label = { Text("Timer for: ") },
+                singleLine = true
+            )
+
+
+            Spacer(modifier = Modifier.height(16.dp))
+
+            Button(
+                onClick = {
+                    selectedMinutes = inputText.toInt()
+                    timeLimit = (selectedMinutes * 60)
+                    timeElapsed = 0
+                    isRunning = true
+                },
+                enabled = inputText.isNotEmpty()
+            ) {
+                Text("Start Timer")
+            }
+        } else {
+            Button(
+                onClick = {
+                    isRunning = false
+                }
+            ) {
+                Text("Stop Timer")
+            }
+        }
+
     }
 }
 
 
+// Progress Bar for Timer
 @Composable
 fun CircularProgressBar(
     timeElapsed: Int,
@@ -50,7 +128,7 @@ fun CircularProgressBar(
     animDuration: Int = 1000,
     animDelay: Int = 0
 ) {
-    var animationPlayed by remember { mutableStateOf(false)}
+    var animationPlayed by remember { mutableStateOf(false) }
 
     val curPercentage = animateFloatAsState(
         targetValue = if (animationPlayed) (timeElapsed.toFloat() / timeLimitInSeconds) else 0f,
@@ -61,7 +139,7 @@ fun CircularProgressBar(
 
     )
 
-    var timeLeft = timeLimitInSeconds - timeElapsed
+    val timeLeft = timeLimitInSeconds - timeElapsed
 
     LaunchedEffect(key1 = true) {
         animationPlayed = true
@@ -83,6 +161,7 @@ fun CircularProgressBar(
         }
 
         Text(
+            // Text formatting MM:SS
             text = String.format("%02d:%02d", timeLeft / 60, timeLeft % 60),
             fontSize = fontSize,
             fontWeight = FontWeight.Bold
