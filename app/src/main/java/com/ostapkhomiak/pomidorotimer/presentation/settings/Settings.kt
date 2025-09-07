@@ -1,4 +1,4 @@
-package com.ostapkhomiak.pomidorotimer.presentation.inventory
+package com.ostapkhomiak.pomidorotimer.presentation.settings
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
@@ -9,18 +9,15 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 
-
-// visual appearance of Inventory
-
 @Composable
-fun ShowInventory() {
+fun ShowSettings(){
     Box(
         modifier = Modifier
             .fillMaxSize()
             .padding(32.dp),
         contentAlignment = Alignment.Center
     ) {
-        Text("Inventory Test")
+        Text("Settings Test")
 
     }
 
