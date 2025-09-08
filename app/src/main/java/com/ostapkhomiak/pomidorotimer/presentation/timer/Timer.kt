@@ -19,6 +19,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
@@ -38,10 +39,10 @@ import kotlinx.coroutines.delay
 @Composable
 fun ShowTimer() {
     var inputText by remember { mutableStateOf("1") }
-    var selectedMinutes by remember { mutableStateOf(1) }
+    var selectedMinutes by remember { mutableIntStateOf(1) }
     var isRunning by remember { mutableStateOf(false) }
-    var timeElapsed by remember { mutableStateOf(0) }
-    var timeLimit by remember { mutableStateOf(60) }
+    var timeElapsed by remember { mutableIntStateOf(0) }
+    var timeLimit by remember { mutableIntStateOf(60) }
 
     // Timer countdown
     LaunchedEffect(isRunning) {
@@ -130,7 +131,6 @@ fun CircularProgressBar(
             durationMillis = animDuration,
             delayMillis = animDelay
         )
-
     )
 
     val timeLeft = timeLimitInSeconds - timeElapsed
