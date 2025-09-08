@@ -78,7 +78,7 @@ fun ShowTimer() {
                         inputText = newValue
                     }
                 },
-                label = { Text("Timer for: ") },
+                label = { Text("Time in minutes: ") },
                 singleLine = true
             )
 
