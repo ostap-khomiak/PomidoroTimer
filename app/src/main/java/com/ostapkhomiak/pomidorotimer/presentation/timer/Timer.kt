@@ -34,6 +34,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.ostapkhomiak.pomidorotimer.ui.theme.Purple40
 import kotlinx.coroutines.delay
+import java.util.Locale
 
 
 @Composable
@@ -156,7 +157,7 @@ fun CircularProgressBar(
 
         Text(
             // Text formatting MM:SS
-            text = String.format("%02d:%02d", timeLeft / 60, timeLeft % 60),
+            text = String.format(Locale.ENGLISH, "%02d:%02d", timeLeft / 60, timeLeft % 60),
             fontSize = fontSize,
             fontWeight = FontWeight.Bold
         )
