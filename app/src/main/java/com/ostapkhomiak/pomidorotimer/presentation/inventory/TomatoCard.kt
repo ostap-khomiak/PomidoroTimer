@@ -14,19 +14,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
-import com.ostapkhomiak.pomidorotimer.R
+import com.ostapkhomiak.pomidorotimer.data.inventory.Tomato
 import com.ostapkhomiak.pomidorotimer.ui.theme.PurpleGrey40
-import java.time.LocalDate
-
-// ui model
-
-
-data class Tomato(
-    val id: Int,
-    val icon: Int = R.drawable.tomato,
-    val date: LocalDate,
-    val timeElapsed: String  // Time
-)
 
 
 // card visual

@@ -8,8 +8,10 @@ import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -18,8 +20,8 @@ import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
@@ -32,30 +34,22 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.viewmodel.compose.viewModel
+import com.ostapkhomiak.pomidorotimer.domain.TimerModel
 import com.ostapkhomiak.pomidorotimer.ui.theme.Purple40
-import kotlinx.coroutines.delay
 import java.util.Locale
 
 
 @Composable
-fun ShowTimer() {
+fun ShowTimer(viewModel: TimerModel = viewModel()) {
     var inputText by remember { mutableStateOf("1") }
-    var selectedMinutes by remember { mutableIntStateOf(1) }
-    var isRunning by remember { mutableStateOf(false) }
-    var timeElapsed by remember { mutableIntStateOf(0) }
-    var timeLimit by remember { mutableIntStateOf(60) }
 
-    // Timer countdown
-    LaunchedEffect(isRunning) {
-        if (isRunning) {
-            timeElapsed = 0
-            while (timeElapsed < timeLimit && isRunning) {
-                delay(1000L)
-                timeElapsed++
-            }
-            isRunning = false
-        }
-    }
+
+    val isRunning by viewModel.isRunning.collectAsState()
+    val timeElapsed by viewModel.timeElapsed.collectAsState()
+    val timeLimit by viewModel.timeLimit.collectAsState()
+    val isPaused by viewModel.isPaused.collectAsState()
+
 
     Column(
         modifier = Modifier
@@ -71,8 +65,7 @@ fun ShowTimer() {
 
         Spacer(modifier = Modifier.height(32.dp))
 
-        if (!isRunning) {
-
+        if (!isRunning && !isPaused) {
             OutlinedTextField(
                 value = inputText,
                 onValueChange = { newValue ->
@@ -84,28 +77,58 @@ fun ShowTimer() {
                 singleLine = true
             )
 
-
             Spacer(modifier = Modifier.height(16.dp))
+
 
             Button(
                 onClick = {
-                    selectedMinutes = inputText.toInt()
-                    timeLimit = (selectedMinutes * 60)
-                    timeElapsed = 0
-                    isRunning = true
+                    val minutes = inputText.toIntOrNull() ?: 1
+                    viewModel.startTimer(minutes)
                 },
                 enabled = inputText.isNotEmpty()
             ) {
                 Text("Start Timer")
             }
+
+
         } else {
-            Button(
-                onClick = {
-                    isRunning = false
-                }
+            Row(
+                horizontalArrangement = Arrangement.spacedBy(16.dp),
+                modifier = Modifier.fillMaxWidth()
             ) {
-                Text("Stop Timer")
+                Button(
+                    onClick = {
+                        viewModel.stopTimer()
+                    },
+                    modifier = Modifier.weight(1f)
+                ) {
+                    Text("Stop")
+                }
+
+
+
+                if( isPaused){
+                    Button(
+                        onClick = {
+                            viewModel.resumeTimer()
+                        },
+                        modifier = Modifier.weight(1f)
+                    ) {
+                        Text("Resume")
+                    }
+                } else{
+                    Button(
+                        onClick = {
+                            viewModel.pauseTimer()
+                        },
+                        modifier = Modifier.weight(1f)
+                    ) {
+                        Text("Pause")
+                    }
+                }
+
             }
+
         }
 
     }
@@ -127,11 +150,14 @@ fun CircularProgressBar(
     var animationPlayed by remember { mutableStateOf(false) }
 
     val curPercentage = animateFloatAsState(
-        targetValue = if (animationPlayed) (timeElapsed.toFloat() / timeLimitInSeconds) else 0f,
+        targetValue = if (timeLimitInSeconds > 0)
+            timeElapsed.toFloat() / timeLimitInSeconds
+        else 0f,
         animationSpec = tween(
             durationMillis = animDuration,
             delayMillis = animDelay
-        )
+        ),
+        label = "progressAnimation"
     )
 
     val timeLeft = timeLimitInSeconds - timeElapsed
