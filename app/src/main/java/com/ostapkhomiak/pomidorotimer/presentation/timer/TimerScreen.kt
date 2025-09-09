@@ -147,7 +147,7 @@ fun CircularProgressBar(
     animDuration: Int = 1000,
     animDelay: Int = 0
 ) {
-    var animationPlayed by remember { mutableStateOf(false) }
+
 
     val curPercentage = animateFloatAsState(
         targetValue = if (timeLimitInSeconds > 0)
@@ -162,9 +162,6 @@ fun CircularProgressBar(
 
     val timeLeft = timeLimitInSeconds - timeElapsed
 
-    LaunchedEffect(key1 = true) {
-        animationPlayed = true
-    }
 
 
     Box(
