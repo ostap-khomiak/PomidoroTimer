@@ -10,7 +10,7 @@ import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.ostapkhomiak.pomidorotimer.data.inventory.Tomato
+import com.ostapkhomiak.pomidorotimer.data.inventory.TomatoModel
 import java.time.LocalDate
 
 
@@ -26,12 +26,12 @@ fun ShowInventory() {
     ) {
 
         // for debugging purposes
-        val tomato1Test = Tomato(
+        val tomato1Test = TomatoModel(
             id = 1,
             date = LocalDate.now(),
             timeElapsed = "10:00"
         )
-        val tomato2Test = Tomato(
+        val tomato2Test = TomatoModel(
             id = 2,
             date = LocalDate.now(),
             timeElapsed = "25:00"

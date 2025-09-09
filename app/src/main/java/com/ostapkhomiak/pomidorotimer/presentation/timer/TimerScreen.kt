@@ -34,13 +34,13 @@ import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
-import com.ostapkhomiak.pomidorotimer.domain.TimerModel
+import com.ostapkhomiak.pomidorotimer.domain.TimerViewModel
 import com.ostapkhomiak.pomidorotimer.ui.theme.Purple40
 import java.util.Locale
 
 
 @Composable
-fun ShowTimer(viewModel: TimerModel = viewModel()) {
+fun ShowTimer(viewModel: TimerViewModel = viewModel()) {
     var inputText by remember { mutableStateOf("1") }
 
 

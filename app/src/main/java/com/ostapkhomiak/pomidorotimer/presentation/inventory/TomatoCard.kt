@@ -14,13 +14,13 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
-import com.ostapkhomiak.pomidorotimer.data.inventory.Tomato
+import com.ostapkhomiak.pomidorotimer.data.inventory.TomatoModel
 import com.ostapkhomiak.pomidorotimer.ui.theme.PurpleGrey40
 
 
 // card visual
 @Composable
-fun TomatoCard(tomato: Tomato) {
+fun TomatoCard(tomato: TomatoModel) {
     Box(
         modifier = Modifier
             .fillMaxWidth()

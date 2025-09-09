@@ -9,7 +9,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 
-class TimerModel : ViewModel (){
+class TimerViewModel : ViewModel (){
 
     private var timerJob: Job? = null
     private var _isRunning = MutableStateFlow(false)
