@@ -1,5 +1,7 @@
 package com.ostapkhomiak.pomidorotimer.presentation.navigation
 
+import android.os.Build
+import androidx.annotation.RequiresApi
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Home
@@ -18,19 +20,33 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.ostapkhomiak.pomidorotimer.domain.InventoryViewModel
+import com.ostapkhomiak.pomidorotimer.domain.TimerViewModel
+import com.ostapkhomiak.pomidorotimer.domain.TomatoRepository
 import com.ostapkhomiak.pomidorotimer.presentation.inventory.ShowInventory
 import com.ostapkhomiak.pomidorotimer.presentation.settings.ShowSettings
 import com.ostapkhomiak.pomidorotimer.presentation.timer.ShowTimer
 
+@RequiresApi(Build.VERSION_CODES.O)
 @Composable
 fun NavigationInit() {
+    val context = LocalContext.current
+    val repository = remember { TomatoRepository(context.applicationContext) }
+
+    val inventoryViewModel = remember { InventoryViewModel(repository) }
+    val timerViewModel = remember { TimerViewModel(repository) }
+
+
     val navController = rememberNavController()
 
     Scaffold(
@@ -41,8 +57,8 @@ fun NavigationInit() {
             startDestination = Screen.Timer.route,
             modifier = Modifier.padding(innerPadding)
         ) {
-            composable(Screen.Timer.route) { ShowTimer() }
-            composable(Screen.Inventory.route) { ShowInventory() }
+            composable(Screen.Timer.route) { ShowTimer(viewModel = timerViewModel) }
+            composable(Screen.Inventory.route) { ShowInventory(viewModel = inventoryViewModel) }
             composable(Screen.Settings.route) { ShowSettings() }
 
         }

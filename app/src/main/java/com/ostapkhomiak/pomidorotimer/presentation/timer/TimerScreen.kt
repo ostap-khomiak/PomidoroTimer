@@ -1,6 +1,8 @@
 package com.ostapkhomiak.pomidorotimer.presentation.timer
 
 
+import android.os.Build
+import androidx.annotation.RequiresApi
 import androidx.compose.ui.graphics.Color
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.tween
@@ -33,14 +35,14 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.lifecycle.viewmodel.compose.viewModel
 import com.ostapkhomiak.pomidorotimer.domain.TimerViewModel
 import com.ostapkhomiak.pomidorotimer.ui.theme.Purple40
 import java.util.Locale
 
 
+@RequiresApi(Build.VERSION_CODES.O)
 @Composable
-fun ShowTimer(viewModel: TimerViewModel = viewModel()) {
+fun ShowTimer(viewModel: TimerViewModel) {
     var inputText by remember { mutableStateOf("1") }
 
 
@@ -106,7 +108,7 @@ fun ShowTimer(viewModel: TimerViewModel = viewModel()) {
 
 
 
-                if( isPaused){
+                if (isPaused) {
                     Button(
                         onClick = {
                             viewModel.resumeTimer()
@@ -115,7 +117,7 @@ fun ShowTimer(viewModel: TimerViewModel = viewModel()) {
                     ) {
                         Text("Resume")
                     }
-                } else{
+                } else {
                     Button(
                         onClick = {
                             viewModel.pauseTimer()
