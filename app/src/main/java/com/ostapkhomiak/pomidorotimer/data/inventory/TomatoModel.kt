@@ -7,16 +7,16 @@ data class TomatoModel(
     val rarity: String,
     val icon: Int = when (rarity) {
         "Legendary" -> {
-            R.drawable.tomato //TODO: replace with different icons
+            R.drawable.legendary_tomato
         }
         "Epic" -> {
-            R.drawable.tomato
+            R.drawable.epic_tomato
         }
         "Rare" -> {
-            R.drawable.tomato
+            R.drawable.rare_tomato
         }
         else -> {
-            R.drawable.tomato
+            R.drawable.common_tomato
         }
     },
     val date: String,

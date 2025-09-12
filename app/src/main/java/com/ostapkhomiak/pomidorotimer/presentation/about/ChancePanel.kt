@@ -41,24 +41,24 @@ fun ChancePanel(rarity: String, chance: Int) {
             horizontalArrangement = Arrangement.SpaceBetween
         ) {
 
-            when (rarity) {  // TODO: change icons
+            when (rarity) {
                 "Legendary" -> {
-                    CreateImage(R.drawable.tomato, "Legendary")
+                    CreateImage(R.drawable.legendary_tomato, "Legendary")
                     Text(text = rarity, color = Color(0xFFFFD700), fontWeight = FontWeight.Bold)
                 }
 
                 "Epic" -> {
-                    CreateImage(R.drawable.tomato, "Epic")
+                    CreateImage(R.drawable.epic_tomato, "Epic")
                     Text(text = rarity, color = Color(0xFF9B30FF), fontWeight = FontWeight.Bold)
                 }
 
                 "Rare" -> {
-                    CreateImage(R.drawable.tomato, "Rare")
+                    CreateImage(R.drawable.rare_tomato, "Rare")
                     Text(text = rarity, color = Color(0xFF1E90FF), fontWeight = FontWeight.Bold)
                 }
 
                 else -> {
-                    CreateImage(R.drawable.tomato, "Common")
+                    CreateImage(R.drawable.common_tomato, "Common")
                     Text(
                         text = rarity, color = Color(0xFF888888), fontWeight = FontWeight.Bold
                     )

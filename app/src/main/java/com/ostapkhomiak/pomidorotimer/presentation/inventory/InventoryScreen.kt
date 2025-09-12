@@ -28,7 +28,7 @@ fun ShowInventory(viewModel: InventoryViewModel ) {
         val tomatoes by viewModel.inventoryList.collectAsState()
         println(tomatoes.toString())
         LazyVerticalGrid(
-            columns = GridCells.Fixed(2)
+            columns = GridCells.Adaptive(128.dp)
         ) {
             items(tomatoes) { tomato ->
                 TomatoCard(tomato, {viewModel.removeTomato(tomato)})

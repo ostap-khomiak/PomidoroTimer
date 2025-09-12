@@ -1,8 +1,10 @@
 package com.ostapkhomiak.pomidorotimer.presentation.inventory
 
+import androidx.compose.animation.animateContentSize
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -10,6 +12,7 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Delete
@@ -37,8 +40,8 @@ import com.ostapkhomiak.pomidorotimer.ui.theme.PurpleGrey40
 fun TomatoCard(
     tomato: TomatoModel,
     onDelete: (TomatoModel) -> Unit
-    ) {
-    var showDelete by remember { mutableStateOf(false)}
+) {
+    var showDelete by remember { mutableStateOf(false) }
 
     Box(
         modifier = Modifier
@@ -48,14 +51,18 @@ fun TomatoCard(
             .background(
                 color = PurpleGrey40.copy(alpha = 0.2f) // transparency
             )
-            .clickable{showDelete = !showDelete}
+            .clickable { showDelete = !showDelete }
+            .animateContentSize()
     ) {
-        Column(horizontalAlignment = Alignment.CenterHorizontally) {
+        Column(
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
             Text(tomato.rarity)
 
             Image(
                 painter = painterResource(id = tomato.icon),
-                contentDescription = "Tomato"
+                contentDescription = "Tomato",
+                modifier = Modifier.size(128.dp)
             )
 
             Text(tomato.date)
@@ -68,16 +75,14 @@ fun TomatoCard(
 
                 Button(
                     modifier = Modifier.fillMaxWidth(),
-                    onClick = {onDelete(tomato)},
+                    onClick = { onDelete(tomato) },
                     colors = ButtonDefaults.buttonColors(
                         containerColor = Color.Red,
                         contentColor = Color.White
                     )
                 ) {
-                    Row{
-                        Icon(Icons.Filled.Delete, contentDescription = null)
-
-                        Text("Delete")
+                    Row {
+                        Icon(Icons.Filled.Delete, contentDescription = "delete")
                     }
                 }
             }
