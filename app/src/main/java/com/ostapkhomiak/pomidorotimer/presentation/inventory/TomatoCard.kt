@@ -27,12 +27,14 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import com.ostapkhomiak.pomidorotimer.data.inventory.TomatoModel
-import com.ostapkhomiak.pomidorotimer.ui.theme.PurpleGrey40
-
+import com.ostapkhomiak.pomidorotimer.ui.theme.Purple40
+import com.ostapkhomiak.pomidorotimer.ui.theme.Purple80
 
 // card visual
 @Composable
@@ -48,7 +50,11 @@ fun TomatoCard(
             .padding(16.dp)
             .clip(RoundedCornerShape(16.dp)) // round corners
             .background(
-                color = PurpleGrey40.copy(alpha = 0.2f) // transparency
+                brush = Brush.linearGradient(
+                    colors = listOf(Purple80.copy(0.5f), Purple40.copy(0.5f)), // example purple gradient
+                    start = Offset(0f, 0f),
+                    end = Offset(0f, 200f)
+                )
             )
             .clickable { showDelete = !showDelete }
             .animateContentSize()
