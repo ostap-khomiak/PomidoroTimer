@@ -51,7 +51,7 @@ fun TomatoCard(
             .clickable{showDelete = !showDelete}
     ) {
         Column(horizontalAlignment = Alignment.CenterHorizontally) {
-            Text("Tomato: ${tomato.id}")
+            Text(tomato.rarity)
 
             Image(
                 painter = painterResource(id = tomato.icon),
