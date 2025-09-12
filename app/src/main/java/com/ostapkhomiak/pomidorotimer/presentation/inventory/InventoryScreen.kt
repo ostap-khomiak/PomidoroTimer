@@ -31,8 +31,9 @@ fun ShowInventory(viewModel: InventoryViewModel ) {
             columns = GridCells.Fixed(2)
         ) {
             items(tomatoes) { tomato ->
-                TomatoCard(tomato)
+                TomatoCard(tomato, {viewModel.removeTomato(tomato)})
             }
         }
     }
 }
+

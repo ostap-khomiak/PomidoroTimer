@@ -45,4 +45,10 @@ class TomatoRepository(context: Context) {
         _tomatoes.value = newList
         saveTomatoes(newList)
     }
+
+    fun removeTomato(tomato: TomatoModel){
+        val newList = _tomatoes.value - tomato
+        _tomatoes.value = newList
+        saveTomatoes(newList)
+    }
 }
