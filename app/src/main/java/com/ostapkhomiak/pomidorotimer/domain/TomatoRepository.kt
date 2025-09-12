@@ -2,7 +2,6 @@ package com.ostapkhomiak.pomidorotimer.domain
 
 import android.content.Context
 import android.os.Build
-import android.os.SystemClock
 import androidx.annotation.RequiresApi
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
