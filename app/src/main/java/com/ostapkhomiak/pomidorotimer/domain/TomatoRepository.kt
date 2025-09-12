@@ -44,7 +44,7 @@ class TomatoRepository(context: Context) {
         val newList = _tomatoes.value + TomatoModel(
             id = _tomatoes.value.size,
             rarity = rarity,
-            date = LocalDate.now(),
+            date = LocalDate.now().toString(),
             timeElapsed = String.format(
                 Locale.ENGLISH,
                 "%02d:%02d",

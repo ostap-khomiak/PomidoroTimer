@@ -58,7 +58,7 @@ fun TomatoCard(
                 contentDescription = "Tomato"
             )
 
-            Text(tomato.date.toString())
+            Text(tomato.date)
 
             Text(tomato.timeElapsed)
 

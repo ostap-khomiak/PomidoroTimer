@@ -20,7 +20,7 @@ data class TomatoModel(
             R.drawable.tomato
         }
     },
-    val date: LocalDate,
+    val date: String,
     val timeElapsed: String  // Time
 )
 
