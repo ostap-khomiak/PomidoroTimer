@@ -16,7 +16,13 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.PauseCircle
+import androidx.compose.material.icons.filled.PlayCircle
+import androidx.compose.material.icons.filled.ReplayCircleFilled
+import androidx.compose.material.icons.filled.StopCircle
 import androidx.compose.material3.Button
+import androidx.compose.material3.Icon
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -89,7 +95,17 @@ fun ShowTimer(viewModel: TimerViewModel) {
                 },
                 enabled = inputText.isNotEmpty()
             ) {
-                Text("Start Timer")
+                Row(
+                    verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.Center
+                ) {
+                    Icon(
+                        Icons.Filled.PlayCircle,
+                        contentDescription = "play"
+                    )
+                    Spacer(modifier = Modifier.padding(8.dp))
+                    Text("Start Timer")
+                }
             }
 
 
@@ -104,7 +120,17 @@ fun ShowTimer(viewModel: TimerViewModel) {
                     },
                     modifier = Modifier.weight(1f)
                 ) {
-                    Text("Stop")
+                    Row(
+                        verticalAlignment = Alignment.CenterVertically,
+                        horizontalArrangement = Arrangement.Center
+                    ) {
+                        Icon(
+                            Icons.Filled.StopCircle,
+                            contentDescription = "stop"
+                        )
+                        Spacer(modifier = Modifier.padding(8.dp))
+                        Text("Stop")
+                    }
                 }
 
 
@@ -116,7 +142,17 @@ fun ShowTimer(viewModel: TimerViewModel) {
                         },
                         modifier = Modifier.weight(1f)
                     ) {
-                        Text("Resume")
+                        Row(
+                            verticalAlignment = Alignment.CenterVertically,
+                            horizontalArrangement = Arrangement.Center
+                        ) {
+                            Icon(
+                                Icons.Filled.ReplayCircleFilled,
+                                contentDescription = "resume"
+                            )
+                            Spacer(modifier = Modifier.padding(8.dp))
+                            Text("Resume")
+                        }
                     }
                 } else {
                     Button(
@@ -125,7 +161,17 @@ fun ShowTimer(viewModel: TimerViewModel) {
                         },
                         modifier = Modifier.weight(1f)
                     ) {
-                        Text("Pause")
+                        Row(
+                            verticalAlignment = Alignment.CenterVertically,
+                            horizontalArrangement = Arrangement.Center
+                        ) {
+                            Icon(
+                                Icons.Filled.PauseCircle,
+                                contentDescription = "pause"
+                            )
+                            Spacer(modifier = Modifier.padding(8.dp))
+                            Text("Pause")
+                        }
                     }
                 }
 
