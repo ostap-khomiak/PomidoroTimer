@@ -33,9 +33,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import com.ostapkhomiak.pomidorotimer.R
 import com.ostapkhomiak.pomidorotimer.data.inventory.TomatoModel
-import com.ostapkhomiak.pomidorotimer.presentation.about.CreateImage
 import com.ostapkhomiak.pomidorotimer.ui.theme.Purple40
 import com.ostapkhomiak.pomidorotimer.ui.theme.Purple80
 
