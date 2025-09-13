@@ -6,7 +6,6 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -103,9 +102,7 @@ fun TomatoCard(
                         contentColor = Color.White
                     )
                 ) {
-                    Row {
-                        Icon(Icons.Filled.Delete, contentDescription = "delete")
-                    }
+                    Icon(Icons.Filled.Delete, contentDescription = "delete")
                 }
             }
         }
