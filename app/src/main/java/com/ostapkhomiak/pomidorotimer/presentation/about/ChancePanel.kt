@@ -25,7 +25,7 @@ import com.ostapkhomiak.pomidorotimer.R
 import com.ostapkhomiak.pomidorotimer.ui.theme.Purple40
 import com.ostapkhomiak.pomidorotimer.ui.theme.Purple80
 
-
+// chances visuals
 @Composable
 fun ChancePanel(rarity: String, chance: Int) {
 
@@ -36,7 +36,7 @@ fun ChancePanel(rarity: String, chance: Int) {
             .clip(RoundedCornerShape(16.dp)) // round corners
             .background(
                 brush = Brush.linearGradient(
-                    colors = listOf(Purple80.copy(0.4f), Purple40.copy(0.4f)), // example purple gradient
+                    colors = listOf(Purple80.copy(0.4f), Purple40.copy(0.4f)),
                     start = Offset(0f, 0f),
                     end = Offset(200f, 400f)
                 )
