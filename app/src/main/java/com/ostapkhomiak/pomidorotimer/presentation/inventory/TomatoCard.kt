@@ -31,8 +31,11 @@ import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import com.ostapkhomiak.pomidorotimer.R
 import com.ostapkhomiak.pomidorotimer.data.inventory.TomatoModel
+import com.ostapkhomiak.pomidorotimer.presentation.about.CreateImage
 import com.ostapkhomiak.pomidorotimer.ui.theme.Purple40
 import com.ostapkhomiak.pomidorotimer.ui.theme.Purple80
 
@@ -62,7 +65,23 @@ fun TomatoCard(
         Column(
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            Text(tomato.rarity)
+            when (tomato.rarity) {
+                "Legendary" -> {
+                    Text(text = tomato.rarity, color = Color(0xFFFFD700), fontWeight = FontWeight.Bold)
+                }
+
+                "Epic" -> {
+                    Text(text = tomato.rarity, color = Color(0xFF9B30FF), fontWeight = FontWeight.Bold)
+                }
+
+                "Rare" -> {
+                    Text(text = tomato.rarity, color = Color(0xFF1E90FF), fontWeight = FontWeight.Bold)
+                }
+
+                else -> {
+                    Text(text = tomato.rarity, color = Color(0xFF888888), fontWeight = FontWeight.Bold)
+                }
+            }
 
             Image(
                 painter = painterResource(id = tomato.icon),
