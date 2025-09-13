@@ -51,9 +51,9 @@ fun TomatoCard(
             .clip(RoundedCornerShape(16.dp)) // round corners
             .background(
                 brush = Brush.linearGradient(
-                    colors = listOf(Purple80.copy(0.5f), Purple40.copy(0.5f)), // example purple gradient
+                    colors = listOf(Purple80.copy(0.4f), Purple40.copy(0.4f)), // example purple gradient
                     start = Offset(0f, 0f),
-                    end = Offset(0f, 200f)
+                    end = Offset(50f, 100f)
                 )
             )
             .clickable { showDelete = !showDelete }
